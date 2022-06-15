@@ -1,3 +1,3 @@
-export default function concatArrays(a, b, c) {
-  return a.concat(b, Array.from(c));
+export default function concatArrays(array1, array2, string) {
+  return array1.concat(array2, Array.from(string));
 }
