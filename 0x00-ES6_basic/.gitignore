@@ -1,9 +1,10 @@
 #node
 
-# node_modules/
+node_modules/
 .eslintrc.js
 package*
 babel.config.js
+*-main.js
 
 # Swap
 [._]*.s[a-v][a-z]
