@@ -20,13 +20,13 @@ export default class HolbertonCourse {
   set name(val) {
     if (typeof val === 'string') this._name = val;
 
-    else throw new TypeError('Name must be a string');
+    else throw TypeError('Name must be a string');
   }
 
   set length(val) {
     if (typeof val === 'number') this._name = val;
 
-    else throw new TypeError('Length must be a number');
+    else throw TypeError('Length must be a number');
   }
 
   set students(val) {
