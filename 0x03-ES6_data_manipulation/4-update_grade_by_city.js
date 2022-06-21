@@ -4,7 +4,7 @@ export default function updateStudentGradeByCity(list, city, obj) {
     .reduce((acc, cur) => {
       obj.forEach((z) => {
         if (z.studentId === cur.id) {
-          cur.grade = z.grade;
+          cur.grade = z.grade ? z.grade : 'N/A';
           acc.push(cur);
         }
       });
