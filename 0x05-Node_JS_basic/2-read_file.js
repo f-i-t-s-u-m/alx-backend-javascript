@@ -13,12 +13,12 @@ function countStudents(path) {
       field: item[3].replace('\r', ''),
     }));
 
-  const swe = (std.filter((item) => item.field === 'SWE'));
-  const cs = (std.filter((item) => item.field === 'CS'));
+  const swe = std.filter((item) => item.field === 'SWE').map((v) => v.firstName);
+  const cs = std.filter((item) => item.field === 'CS').map((v) => v.firstName);
 
   console.log(`Number of students: ${std.length}`);
-  console.log(`Number of students in CS: ${cs.length}. List: ${cs.map((v) => v.firstName).join(', ')}`);
-  console.log(`Number of students in SWE: ${swe.length}. List: ${swe.map((v) => v.firstName).join(', ')}`);
+  console.log(`Number of students in CS: ${cs.length}. List: ${cs.join(', ')}`);
+  console.log(`Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
 }
 
 module.exports = countStudents;
