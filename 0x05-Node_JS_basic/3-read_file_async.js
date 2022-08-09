@@ -1,9 +1,12 @@
 const fs = require('fs');
 
-const countStudents = (path) => {
-  if (!fs.existsSync(path)) throw new Error('Cannot load the database');
-
-  const data = fs.readFileSync(path, 'utf8');
+const countStudents = async (path) => {
+  let data;
+  try {
+    data = await fs.promises.readFile(path, 'utf8');
+  } catch (error) {
+    throw new Error('Cannot load the database');
+  }
 
   // split where a new line exists
   const students = data.split('\n')
@@ -28,6 +31,7 @@ const countStudents = (path) => {
   console.log(`Number of students: ${students.length}`);
   console.log(`Number of students in CS: ${CS.length}. List: ${CS.join(', ')}`);
   console.log(`Number of students in SWE: ${SWE.length}. List: ${SWE.join(', ')}`);
+  return { students, CS, SWE };
 };
 
 module.exports = countStudents;
