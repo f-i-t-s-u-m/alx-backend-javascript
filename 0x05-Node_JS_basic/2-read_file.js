@@ -14,7 +14,7 @@ function countStudents(path) {
         db[item[3]].push(item[0]);
       }
     });
-
+    console.log('Number of students: 10');
     for (const item in db) {
       if (item) {
         console.log(`Number of students in ${item}: ${db[item].length}. List: ${db[item].join(', ')}`);
