@@ -10,7 +10,7 @@ function countStudents(path) {
       firstName: item[0],
       lastName: item[1],
       age: item[2],
-      field: item[3],
+      field: item[3].replace('\r', ''),
     }));
 
   const swe = (std.filter((item) => item.field === 'SWE'));
