@@ -2,25 +2,30 @@ const fs = require('fs');
 
 function countStudents(path) {
   const db = {};
-  fs.readFile(path, 'utf-8', (err, data) => {
-    if (err) {
-      throw new Error('Cannot load the database');
-    }
-    const col = data.split('\n');
-    col.forEach((value, key) => {
-      if (key !== 0) {
-        const item = value.split(',');
-        if (db[item[3]] == null) db[item[3]] = [];
-        db[item[3]].push(item[0]);
-      }
-    });
-    console.log('Number of students: 10');
-    for (const item in db) {
-      if (item) {
-        console.log(`Number of students in ${item}: ${db[item].length}. List: ${db[item].join(', ')}`);
-      }
-    }
-  });
+  if (!fs.existsSync(path)) throw new Error('Cannot load the database');
+
+  const data = fs.readFileSync(path, 'utf-8').split('\n');
+  const std = data.map((col) => col.split(','))
+    .filter((col, k) => k !== 0)
+    .map((item) => ({
+      firstName: item[0],
+      lastName: item[1],
+      age: item[2],
+      field: item[3],
+    }));
+
+  const swe = (std.filter((item) => item.field === 'SWE'));
+  const cs = (std.filter((item) => item.field === 'CS'));
+
+  console.log(`Number of students: ${std.length}`);
+  console.log(`Number of students in CS: ${cs.length}. List: ${cs.map((v) => v.firstName).join(', ')}`);
+  console.log(`Number of students in SWE: ${swe.length}. List: ${swe.map((v) => v.firstName).join(', ')}`);
+
+//   for (const item in std) {
+//     if (item) {
+//       console.log(`Number of students in ${item.field}: ${db[item].length}. List: ${db[item].firstName.join(', ')}`);
+//     }
+//   }
 }
 
 module.exports = countStudents;
